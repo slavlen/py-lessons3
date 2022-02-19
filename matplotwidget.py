@@ -149,7 +149,7 @@ class MatPlotWidget(QWidget):
 
             x, y, z = data_for_cylinder_along_z(0, 0, params[0], params[1])
             self.canvas.axes.plot_surface(x, y, z)
-            self.canvas.axes.set_box_aspect(aspect=(x, y, z))
+            self.canvas.axes.set_box_aspect(aspect=(params[0], params[0], params[1]))
 
         elif figure == "конус":
             theta = np.linspace(0, 2 * np.pi, 100)
