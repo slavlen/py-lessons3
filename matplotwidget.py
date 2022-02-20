@@ -1,26 +1,22 @@
+import numpy as np
 from PyQt5.QtWidgets import *
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import numpy as np
-from create_figure import *
 
 
 class MatPlotWidget(QWidget):
-
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         self.canvas = FigureCanvasQTAgg(Figure())
         layout = QVBoxLayout()
         layout.addWidget(self.canvas)
-        self.canvas.axes = self.canvas.figure.add_subplot(projection='3d')
+        self.canvas.axes = self.canvas.figure.add_subplot(projection="3d")
         self.canvas.axes.set_box_aspect(aspect=(1, 1, 1))
         self.canvas.axes.set_axis_off()
         self.setLayout(layout)
-        self.canvas.axes.set_xlabel('x')
-        self.canvas.axes.set_ylabel('y')
-        self.canvas.axes.set_zlabel('z')
+        self.canvas.axes.set_xlabel("x")
+        self.canvas.axes.set_ylabel("y")
+        self.canvas.axes.set_zlabel("z")
         self.canvas.axes.set_xlim3d(0, 1000)
         self.canvas.axes.set_ylim3d(0, 1000)
         self.canvas.axes.set_zlim3d(0, 1000)
@@ -76,11 +72,13 @@ class MatPlotWidget(QWidget):
             print(x + endy)
             print(x - endy)
 
-            self.canvas.axes.plot([0, x, (x - endx)], [0, 0, endy],
-                                  [0, 0, 0], color='b')
-            self.canvas.axes.plot([0, -endx, (x + -endx)], [0,  endy, endy],
-                                  [0, 0, 0], color='b')
-            #self.canvas.axes.set_box_aspect(aspect=((x - endx), (x - endx), 0))
+            self.canvas.axes.plot(
+                [0, x, (x - endx)], [0, 0, endy], [0, 0, 0], color="b"
+            )
+            self.canvas.axes.plot(
+                [0, -endx, (x + -endx)], [0, endy, endy], [0, 0, 0], color="b"
+            )
+            # self.canvas.axes.set_box_aspect(aspect=((x - endx), (x - endx), 0))
             self.canvas.axes.set_xlim3d(0, x - endx)
             self.canvas.axes.set_ylim3d(0, x - endx)
             self.canvas.axes.set_zlim3d(0, 0)
@@ -96,31 +94,40 @@ class MatPlotWidget(QWidget):
 
         elif figure == "куб":
             x = params[0]
-            self.canvas.axes.plot([0, x, x, 0, 0], [0, 0, x, x, 0], [0, 0, 0, 0, 0], color='b')
-            self.canvas.axes.plot([0, 0, x, x], [0, 0, 0, 0], [0, x, x, 0], color='b')
-            self.canvas.axes.plot([x, x, x, x], [0, 0, x, x], [0, x, x, 0], color='b')
-            self.canvas.axes.plot([x, x, 0, 0], [x, x, x, x], [0, x, x, 0], color='b')
-            self.canvas.axes.plot([0, 0, 0], [x, x, 0], [0, x, x], color='b')
+            self.canvas.axes.plot(
+                [0, x, x, 0, 0], [0, 0, x, x, 0], [0, 0, 0, 0, 0], color="b"
+            )
+            self.canvas.axes.plot([0, 0, x, x], [0, 0, 0, 0], [0, x, x, 0], color="b")
+            self.canvas.axes.plot([x, x, x, x], [0, 0, x, x], [0, x, x, 0], color="b")
+            self.canvas.axes.plot([x, x, 0, 0], [x, x, x, x], [0, x, x, 0], color="b")
+            self.canvas.axes.plot([0, 0, 0], [x, x, 0], [0, x, x], color="b")
             self.canvas.axes.set_box_aspect(aspect=(x, x, x))
 
         elif figure == "паралепипед":
             x = params[0]
             y = params[1]
             z = params[2]
-            self.canvas.axes.plot([0, x, x, 0, 0], [0, 0, y, y, 0], [0, 0, 0, 0, 0], color='b')
-            self.canvas.axes.plot([0, 0, x, x], [0, 0, 0, 0], [0, z, z, 0], color='b')
-            self.canvas.axes.plot([x, x, x, x], [0, 0, y, y], [0, z, z, 0], color='b')
-            self.canvas.axes.plot([x, x, 0, 0], [y, y, y, y], [0, z, z, 0], color='b')
-            self.canvas.axes.plot([0, 0, 0], [y, y, 0], [0, z, z], color='b')
+            self.canvas.axes.plot(
+                [0, x, x, 0, 0], [0, 0, y, y, 0], [0, 0, 0, 0, 0], color="b"
+            )
+            self.canvas.axes.plot([0, 0, x, x], [0, 0, 0, 0], [0, z, z, 0], color="b")
+            self.canvas.axes.plot([x, x, x, x], [0, 0, y, y], [0, z, z, 0], color="b")
+            self.canvas.axes.plot([x, x, 0, 0], [y, y, y, y], [0, z, z, 0], color="b")
+            self.canvas.axes.plot([0, 0, 0], [y, y, 0], [0, z, z], color="b")
             self.canvas.axes.set_box_aspect(aspect=(x, y, z))
 
         elif figure == "пирамида":
+
             def pc(t):
-                x = np.cos(t) * (np.cos(an / 2) / (np.cos(an * (t / an - np.floor(t / an)) - an / 2)))
+                x = np.cos(t) * (
+                    np.cos(an / 2) / (np.cos(an * (t / an - np.floor(t / an)) - an / 2))
+                )
                 return x
 
             def ps(t):
-                y = np.sin(t) * (np.cos(an / 2) / (np.cos(an * (t / an - np.floor(t / an)) - an / 2)))
+                y = np.sin(t) * (
+                    np.cos(an / 2) / (np.cos(an * (t / an - np.floor(t / an)) - an / 2))
+                )
                 return y
 
             n = params[1]
@@ -139,6 +146,7 @@ class MatPlotWidget(QWidget):
             self.canvas.axes.set_box_aspect(aspect=(params[0], params[0], params[2]))
 
         elif figure == "цилиндр":
+
             def data_for_cylinder_along_z(center_x, center_y, radius, height_z):
                 z = np.linspace(0, height_z, 50)
                 theta = np.linspace(0, 2 * np.pi, 50)
@@ -163,5 +171,5 @@ class MatPlotWidget(QWidget):
             self.canvas.axes.plot_surface(x, y, z)
             self.canvas.axes.set_box_aspect(aspect=(x, y, z))
 
-        #self.canvas.axes.set_axis_off()
+        # self.canvas.axes.set_axis_off()
         self.canvas.draw()

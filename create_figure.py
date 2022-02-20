@@ -1,8 +1,9 @@
 from figure_class import flat_figures, volume_figures
 
-figures_types = {"2D": "flat",
-                 "3D": 'volume',
-                 }
+figures_types = {
+    "2D": "flat",
+    "3D": "volume",
+}
 
 
 class CreateFigure:

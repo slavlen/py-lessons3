@@ -78,16 +78,17 @@ class Circle(Flat):
 
     @property
     def area(self):
-        return round(pi * self.r ** 2, 2)
+        return round(pi * self.r**2, 2)
 
 
-flat_figures = {"круг": Circle,
-                "квадрат": Square,
-                "прямоугольник": Rectangle,
-                "треугольник": Triangle,
-                "трапеция": Trapese,
-                "ромб": Rhomb,
-                }
+flat_figures = {
+    "круг": Circle,
+    "квадрат": Square,
+    "прямоугольник": Rectangle,
+    "треугольник": Triangle,
+    "трапеция": Trapese,
+    "ромб": Rhomb,
+}
 
 
 # Объёмные фигуры
@@ -141,14 +142,14 @@ class Pyramid(Volume):
     def area(self):
         tg = tan(radians(180 / self.n))
         arg1 = self.a / 2 / tg
-        arg2 = self.h ** 2 + (self.a / (2 * tg)) ** 2
-        area = self.n * self.a / 2 * (arg1 + arg2 ** 0.5)
+        arg2 = self.h**2 + (self.a / (2 * tg)) ** 2
+        area = self.n * self.a / 2 * (arg1 + arg2**0.5)
         return round(area, 3)
 
     @property
     def volume(self):
         tg = tan(radians(180 / self.n))
-        volume = self.n * self.a ** 2 * self.h / (12 * tg)
+        volume = self.n * self.a**2 * self.h / (12 * tg)
         return round(volume, 3)
 
 
@@ -160,11 +161,11 @@ class Orb(Volume):
 
     @property
     def area(self):
-        return round(4 * pi * self.r ** 2, 3)
+        return round(4 * pi * self.r**2, 3)
 
     @property
     def volume(self):
-        return round(4 / 3 * pi * self.r ** 3, 3)
+        return round(4 / 3 * pi * self.r**3, 3)
 
 
 class Cylinder(Volume):
@@ -180,7 +181,7 @@ class Cylinder(Volume):
 
     @property
     def volume(self):
-        return round(pi * self.r ** 2 * self.h * self._h, 3)
+        return round(pi * self.r**2 * self.h * self._h, 3)
 
 
 class Conus(Cylinder):
@@ -192,13 +193,14 @@ class Conus(Cylinder):
 
     @property
     def area(self):
-        return round(pi * self.r * (self.r + (self.r ** 2 + self.h ** 2) ** 0.5), 3)
+        return round(pi * self.r * (self.r + (self.r**2 + self.h**2) ** 0.5), 3)
 
 
-volume_figures = {"сфера": Orb,
-                  "куб": Cube,
-                  "параллелепипед": Parallelepiped,
-                  "пирамида": Pyramid,
-                  "цилиндр": Cylinder,
-                  "конус": Conus,
-                  }
+volume_figures = {
+    "сфера": Orb,
+    "куб": Cube,
+    "параллелепипед": Parallelepiped,
+    "пирамида": Pyramid,
+    "цилиндр": Cylinder,
+    "конус": Conus,
+}

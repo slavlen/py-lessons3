@@ -1,18 +1,17 @@
 import sys
-from matplotwidget import MatPlotWidget
-from create_figure import *
-from PyQt5 import uic
+
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow
+from create_figure import *
 from pyqtui import Ui_MainWindow
-import numpy as np
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window =QMainWindow()
+    window = QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(window)
     window.show()
+
 
 def radio_signal():
     figures = []
@@ -44,7 +43,7 @@ def button_signal():
     for item in FIELD_TUPLE:
         if item.text() and item.text().isdigit():
             if CreateFigure.get_figure() == "пирамида":
-                if int(item.text()) == 3 or int(item.text()) == 4  and i == 1:
+                if int(item.text()) == 3 or int(item.text()) == 4 and i == 1:
                     args.append(int(item.text()))
                     item.setStyleSheet("color: black")
                 elif item.text() and item.text().isdigit():
@@ -90,7 +89,12 @@ def combo_figures_signal():
             ui.label_a.setText("радиус R, мм:")
         else:
             ui.label_a.setText("сторона a, мм:")
-    elif ui.combo_figures.currentText() in {"треугольник", "трапеция", "параллелепипед", "пирамида"}:
+    elif ui.combo_figures.currentText() in {
+        "треугольник",
+        "трапеция",
+        "параллелепипед",
+        "пирамида",
+    }:
         ui.field_a.setHidden(False)
         ui.label_a.setHidden(False)
         ui.field_b.setHidden(False)
@@ -116,16 +120,12 @@ ui.radioButton_3D.toggled.connect(radio_signal)
 ui.combo_figures.currentTextChanged.connect(combo_figures_signal)
 ui.pushButton.clicked.connect(button_signal)
 
-FIELD_TUPLE = (ui.field_a,
-               ui.field_b,
-               ui.field_c)
-LABLE_TUPLE = (ui.label_a,
-               ui.label_b,
-               ui.label_c)
+FIELD_TUPLE = (ui.field_a, ui.field_b, ui.field_c)
+LABLE_TUPLE = (ui.label_a, ui.label_b, ui.label_c)
 
 
 def layout_cleared(pol=FIELD_TUPLE, lab=LABLE_TUPLE):
-    for i in (pol + lab):
+    for i in pol + lab:
         i.setHidden(True)
         i.setText("")
 
